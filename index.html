@@ -1,0 +1,832 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.1">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="id"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Video Looper dengan Efek Smooth&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>* {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-sizing: border-box;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #333;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 1000px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>header {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(90deg, #3498db, #2c3e50);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 25px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>h1 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 2.2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.subtitle {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0.9;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.main-content {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 25px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.form-section {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #f8f9fa;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 25px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>grid-template-columns: 1fr 1fr;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.form-group {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.full-width {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>grid-column: 1 / -1;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>label {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #2c3e50;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>input, select {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid #ddd;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: border-color 0.3s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>input:focus, select:focus {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: #3498db;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 14px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(90deg, #3498db, #2980b9);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 18px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(90deg, #2980b9, #2573a7);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-2px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn:disabled {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #95a5a6;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: not-allowed;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn i {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-right: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.button-group {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn-play {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(90deg, #2ecc71, #27ae60);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn-download {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(90deg, #e74c3c, #c0392b);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.progress-section {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 25px 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.progress-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #ecf0f1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.progress-bar {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(90deg, #2ecc71, #27ae60);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 0%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: width 0.3s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.status {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #2c3e50;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.video-section {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 25px 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.video-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #000;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 20px 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-left: auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-right: auto;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>video {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.download-section {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 25px 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.download-options {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.download-option {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.3s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.download-option:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-5px);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.download-option h3 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #2c3e50;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.info-box {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #e3f2fd;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-left: 4px solid #2196f3;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 20px 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: left;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.info-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #2196f3;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.looping-info {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-around;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 20px 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.info-card {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-width: 200px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.info-card h3 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #2c3e50;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.info-card p {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #3498db;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.effect-options {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.effect-option {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid #ddd;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: all 0.3s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.effect-option:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: #3498db;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.effect-option.selected {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: #3498db;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #e3f2fd;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>footer {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #7f8c8d;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.9rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-top: 1px solid #eee;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 768px) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.form-section {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>grid-template-columns: 1fr;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>.container {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>h1 {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>font-size: 1.8rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>.main-content {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>padding: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>.looping-info {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>.button-group {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;header&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1&gt;Video Looper dengan Efek Smooth&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="subtitle"&gt;Gabungkan video dengan efek transisi dan download hasilnya&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/header&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="main-content"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="form-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="form-group full-width"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label for="videoFile"&gt;Pilih Video (MP4):&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="file" id="videoFile" accept="video/mp4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="form-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label for="targetDuration"&gt;Durasi Looping (menit):&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="number" id="targetDuration" min="1" value="60"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="form-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label for="transitionEffect"&gt;Efek Transisi:&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;select id="transitionEffect"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;option value="fade"&gt;Fade&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;option value="crossfade" selected&gt;Crossfade&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;option value="blur"&gt;Blur&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;option value="slide"&gt;Slide&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;option value="none"&gt;Tidak Ada&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="form-group full-width"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label&gt;Efek Tambahan:&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="effect-options"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="effect-option selected" data-effect="shadow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="fas fa-border-all"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p&gt;Shadow&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="effect-option" data-effect="glow"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="fas fa-sun"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p&gt;Glow&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="effect-option" data-effect="vignette"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="fas fa-circle"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;p&gt;Vignette&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="button-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button id="previewBtn" class="btn btn-play" disabled&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-play"&gt;&lt;/i&gt; Preview Looping</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button id="processBtn" class="btn"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i class="fas fa-cog"&gt;&lt;/i&gt; Proses &amp; Download</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="progress-section" id="progressSection"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="progress-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="progress-bar" id="progressBar"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="status" id="statusText"&gt;Mempersiapkan proses looping...&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="looping-info" id="loopingInfo"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="info-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;Durasi Asli Video&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p id="originalDurationText"&gt;00:00&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="info-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;Jumlah Loop&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p id="loopCount"&gt;0&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="info-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;Total Durasi&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p id="totalDuration"&gt;00:00&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="video-section" id="videoSection"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2&gt;Preview Video Looping&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="video-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;video id="outputVideo" controls&gt;&lt;/video&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="download-section" id="downloadSection"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2&gt;Download Video Looping&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;Pilih kualitas untuk download:&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="download-options"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="download-option"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3&gt;Kualitas Rendah&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;(Lebih Cepat)&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button class="btn btn-download download-res" data-quality="low"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="fas fa-download"&gt;&lt;/i&gt; Download</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="download-option"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3&gt;Kualitas Sedang&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;(Rekomendasi)&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button class="btn btn-download download-res" data-quality="medium"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="fas fa-download"&gt;&lt;/i&gt; Download</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="download-option"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3&gt;Kualitas Tinggi&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p&gt;(Lebih Lama)&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button class="btn btn-download download-res" data-quality="high"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i class="fas fa-download"&gt;&lt;/i&gt; Download</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="info-box"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="info-title"&gt;Cara Kerja Video Looper:&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;• Video akan digabungkan dengan efek transisi smooth di antara loop&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;• Layout video asli akan dipertahankan tanpa perubahan aspect ratio&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;• Proses lebih cepat dengan teknik pemrosesan yang dioptimasi&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;• Hasil akhir dapat didownload dalam berbagai kualitas&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;footer&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Video Looper dengan Efek Smooth &amp;copy; 2023&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/footer&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.addEventListener('DOMContentLoaded', function() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const videoFileInput = document.getElementById('videoFile');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const targetDurationInput = document.getElementById('targetDuration');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const transitionEffectSelect = document.getElementById('transitionEffect');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const previewBtn = document.getElementById('previewBtn');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const processBtn = document.getElementById('processBtn');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const progressSection = document.getElementById('progressSection');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const progressBar = document.getElementById('progressBar');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const statusText = document.getElementById('statusText');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const videoSection = document.getElementById('videoSection');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const outputVideo = document.getElementById('outputVideo');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const downloadSection = document.getElementById('downloadSection');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const originalDurationText = document.getElementById('originalDurationText');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const loopCountElem = document.getElementById('loopCount');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const totalDurationElem = document.getElementById('totalDuration');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const loopingInfo = document.getElementById('loopingInfo');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const effectOptions = document.querySelectorAll('.effect-option');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const downloadButtons = document.querySelectorAll('.download-res');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let originalVideo = null;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let originalVideoDuration = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let originalVideoWidth = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let originalVideoHeight = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let processedVideoBlob = null;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let selectedEffect = 'shadow';</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Pilih efek</p>
+<p class="p1"><span class="Apple-converted-space">            </span>effectOptions.forEach(option =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>option.addEventListener('click', function() {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>effectOptions.forEach(opt =&gt; opt.classList.remove('selected'));</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>this.classList.add('selected');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>selectedEffect = this.dataset.effect;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Format waktu dari detik ke menit:detik</p>
+<p class="p1"><span class="Apple-converted-space">            </span>function formatTime(seconds) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const mins = Math.floor(seconds / 60);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const secs = Math.floor(seconds % 60);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Validasi input</p>
+<p class="p1"><span class="Apple-converted-space">            </span>function validateInputs() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const isVideoSelected = videoFileInput.files.length &gt; 0;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>previewBtn.disabled = !isVideoSelected;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>videoFileInput.addEventListener('change', function() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>validateInputs();</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (videoFileInput.files.length &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const file = videoFileInput.files[0];</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const videoUrl = URL.createObjectURL(file);</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Buat video element untuk membaca metadata</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const video = document.createElement('video');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>video.src = videoUrl;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>video.onloadedmetadata = function() {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>originalVideoDuration = video.duration;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>originalVideoWidth = video.videoWidth;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>originalVideoHeight = video.videoHeight;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>originalDurationText.textContent = formatTime(originalVideoDuration);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>loopingInfo.style.display = 'flex';</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Hitung looping</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>calculateLooping();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>};</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>targetDurationInput.addEventListener('input', calculateLooping);</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function calculateLooping() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (originalVideoDuration &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const targetDuration = parseInt(targetDurationInput.value) * 60; // konversi ke detik</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const loopCount = Math.ceil(targetDuration / originalVideoDuration);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const totalDuration = loopCount * originalVideoDuration;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>loopCountElem.textContent = loopCount;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>totalDurationElem.textContent = formatTime(totalDuration);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Preview video looping</p>
+<p class="p1"><span class="Apple-converted-space">            </span>previewBtn.addEventListener('click', function() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (videoFileInput.files.length === 0) return;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const file = videoFileInput.files[0];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const videoUrl = URL.createObjectURL(file);</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>outputVideo.src = videoUrl;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>videoSection.style.display = 'block';</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Atur event listener untuk looping</p>
+<p class="p1"><span class="Apple-converted-space">                </span>outputVideo.onended = function() {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Tambahkan efek transisi</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const transitionEffect = transitionEffectSelect.value;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>applyTransitionEffect(outputVideo, transitionEffect, function() {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>outputVideo.currentTime = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>outputVideo.play();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                </span>};</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>outputVideo.play();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Fungsi untuk menerapkan efek transisi</p>
+<p class="p1"><span class="Apple-converted-space">            </span>function applyTransitionEffect(videoElement, effect, callback) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>switch(effect) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>case 'fade':</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>videoElement.style.transition = 'opacity 0.5s ease-in-out';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>videoElement.style.opacity = '0';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>callback();</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>videoElement.style.opacity = '1';</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}, 50);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}, 500);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>break;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>case 'crossfade':</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>videoElement.style.transition = 'opacity 0.8s ease-in-out';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>videoElement.style.opacity = '0.5';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>callback();</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>videoElement.style.opacity = '1';</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}, 50);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}, 800);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>break;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>case 'blur':</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>videoElement.style.transition = 'filter 0.6s ease-in-out';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>videoElement.style.filter = 'blur(5px)';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>callback();</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>videoElement.style.filter = 'blur(0)';</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}, 50);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}, 600);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>break;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>default:</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>callback();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Proses video untuk download</p>
+<p class="p1"><span class="Apple-converted-space">            </span>processBtn.addEventListener('click', async function() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const targetDurationMinutes = parseInt(targetDurationInput.value);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const targetDuration = targetDurationMinutes * 60; // Konversi ke detik</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const transitionEffect = transitionEffectSelect.value;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Validasi</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (!originalVideoDuration || originalVideoDuration &lt;= 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>statusText.textContent = 'Error: Durasi video asli tidak valid';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>statusText.style.color = '#e74c3c';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Hitung berapa kali looping diperlukan</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const loopCount = Math.ceil(targetDuration / originalVideoDuration);</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Tampilkan progress</p>
+<p class="p1"><span class="Apple-converted-space">                </span>progressSection.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>statusText.textContent = 'Mempersiapkan proses looping...';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>statusText.style.color = '#2c3e50';</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Load video yang dipilih</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const file = videoFileInput.files[0];</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const videoUrl = URL.createObjectURL(file);</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Buat video element untuk membaca video asli</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>originalVideo = document.createElement('video');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>originalVideo.src = videoUrl;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>originalVideo.muted = true;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Tunggu sampai metadata video dimuat</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>await new Promise((resolve, reject) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>originalVideo.onloadedmetadata = resolve;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>originalVideo.onerror = reject;</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Timeout untuk error handling</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>reject(new Error('Timeout saat memuat video'));</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}, 10000);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Buat canvas untuk rendering dengan ukuran yang sama dengan video asli</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const canvas = document.createElement('canvas');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const ctx = canvas.getContext('2d');</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Pertahankan ukuran asli video</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>canvas.width = originalVideoWidth;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>canvas.height = originalVideoHeight;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Buat media recorder untuk merekam output</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const stream = canvas.captureStream(30); // 30 FPS</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const recorder = new MediaRecorder(stream, {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>mimeType: 'video/mp4; codecs="avc1.42E01E"',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>videoBitsPerSecond: 3000000 // Bitrate tetap untuk kualitas baik</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const chunks = [];</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>recorder.ondataavailable = e =&gt; chunks.push(e.data);</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>recorder.onstop = () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>processedVideoBlob = new Blob(chunks, { type: 'video/mp4' });</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Tampilkan video hasil</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const processedVideoUrl = URL.createObjectURL(processedVideoBlob);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>outputVideo.src = processedVideoUrl;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>videoSection.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>downloadSection.style.display = 'block';</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>statusText.textContent = 'Proses looping selesai! Kini Anda dapat mendownload video.';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>statusText.style.color = '#27ae60';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>};</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Mulai merekam</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>recorder.start();</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Render frame per frame</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let currentLoop = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let currentTime = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let lastFrameTime = 0;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>statusText.textContent = `Memproses looping: 0/${loopCount}`;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>function renderFrame(timestamp) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (currentLoop &gt;= loopCount) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>recorder.stop();</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Batasi frame rate untuk performa lebih baik</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (!lastFrameTime || timestamp - lastFrameTime &gt;= 1000/30) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>lastFrameTime = timestamp;</p>
+<p class="p2"><span class="Apple-converted-space">                            </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>// Atur waktu video asli berdasarkan posisi dalam loop</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>const videoTime = currentTime % originalVideoDuration;</p>
+<p class="p2"><span class="Apple-converted-space">                            </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>// Pastikan videoTime adalah nilai finite yang valid</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>if (!isFinite(videoTime) || videoTime &lt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>statusText.textContent = 'Error: Waktu video tidak valid';</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>statusText.style.color = '#e74c3c';</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>recorder.stop();</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                            </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>// Atur currentTime video</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>originalVideo.currentTime = videoTime;</p>
+<p class="p2"><span class="Apple-converted-space">                            </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>// Tunggu sampai video siap</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>originalVideo.onseeked = function() {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>// Render frame ke canvas</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>ctx.clearRect(0, 0, canvas.width, canvas.height);</p>
+<p class="p2"><span class="Apple-converted-space">                                </span></p>
+<p class="p1"><span class="Apple-converted-space">                                </span>// Terapkan efek shadow jika dipilih</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>if (selectedEffect === 'shadow') {</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>ctx.shadowBlur = 10;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>ctx.shadowOffsetX = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>ctx.shadowOffsetY = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>} else if (selectedEffect === 'glow') {</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>ctx.shadowBlur = 15;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>ctx.shadowOffsetX = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>ctx.shadowOffsetY = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>} else if (selectedEffect === 'vignette') {</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>// Efek vignette akan ditambahkan setelah drawImage</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                                </span></p>
+<p class="p1"><span class="Apple-converted-space">                                </span>// Gambar video ke canvas</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>ctx.drawImage(originalVideo, 0, 0, canvas.width, canvas.height);</p>
+<p class="p2"><span class="Apple-converted-space">                                </span></p>
+<p class="p1"><span class="Apple-converted-space">                                </span>// Terapkan efek vignette jika dipilih</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>if (selectedEffect === 'vignette') {</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>const gradient = ctx.createRadialGradient(</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>canvas.width / 2, canvas.height / 2, 0,</p>
+<p class="p1"><span class="Apple-converted-space">                                        </span>canvas.width / 2, canvas.height / 2, Math.max(canvas.width, canvas.height) / 2</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>);</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>gradient.addColorStop(0, 'rgba(0,0,0,0)');</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>gradient.addColorStop(0.7, 'rgba(0,0,0,0)');</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>gradient.addColorStop(1, 'rgba(0,0,0,0.5)');</p>
+<p class="p2"><span class="Apple-converted-space">                                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>ctx.fillStyle = gradient;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>ctx.fillRect(0, 0, canvas.width, canvas.height);</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                                </span></p>
+<p class="p1"><span class="Apple-converted-space">                                </span>// Reset shadow</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>ctx.shadowColor = 'transparent';</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>ctx.shadowBlur = 0;</p>
+<p class="p2"><span class="Apple-converted-space">                                </span></p>
+<p class="p1"><span class="Apple-converted-space">                                </span>// Update progress</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>currentTime += 1/30; // 1 frame pada 30 FPS</p>
+<p class="p2"><span class="Apple-converted-space">                                </span></p>
+<p class="p1"><span class="Apple-converted-space">                                </span>// Cek jika sudah mencapai akhir video dalam loop ini</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>if (videoTime + 1/30 &gt;= originalVideoDuration) {</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>currentLoop++;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>const progress = (currentLoop / loopCount) * 100;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>progressBar.style.width = `${progress}%`;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>statusText.textContent = `Memproses looping: ${currentLoop}/${loopCount}`;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>};</p>
+<p class="p2"><span class="Apple-converted-space">                            </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>originalVideo.onerror = function() {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>statusText.textContent = 'Error: Gagal memproses frame video';</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>statusText.style.color = '#e74c3c';</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>recorder.stop();</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>};</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Request frame berikutnya</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>requestAnimationFrame(renderFrame);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Pastikan video diputar untuk menghindari issue pada beberapa browser</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>originalVideo.play().then(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Jeda video setelah mulai diputar</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>originalVideo.pause();</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Mulai proses rendering</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>requestAnimationFrame(renderFrame);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}).catch(error =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>console.error('Error memutar video:', error);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>statusText.textContent = 'Error: Tidak dapat memproses video';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>statusText.style.color = '#e74c3c';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>} catch (error) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>console.error('Error processing video:', error);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>statusText.textContent = 'Error: ' + error.message;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>statusText.style.color = '#e74c3c';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Download handlers</p>
+<p class="p1"><span class="Apple-converted-space">            </span>downloadButtons.forEach(button =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>button.addEventListener('click', function() {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (!processedVideoBlob) return;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const quality = this.dataset.quality;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>let fileName = 'video-looping.mp4';</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Sesuaikan kualitas berdasarkan pilihan</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (quality === 'low') {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>fileName = 'video-looping-cepat.mp4';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else if (quality === 'high') {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>fileName = 'video-looping-hd.mp4';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const a = document.createElement('a');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>a.href = URL.createObjectURL(processedVideoBlob);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>a.download = fileName;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>document.body.appendChild(a);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>a.click();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>document.body.removeChild(a);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
